@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SN - Inscription</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #7d4e3b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .logo {
+            width: 80px;
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            text-align: left;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #5a2d0c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #3e1f08;
+        }
+        .social-login {
+            background: #5a2d0c;
+            margin-top: 5px;
+        }
+        .phone-container {
+            display: flex;
+            align-items: center;
+        }
+        .phone-code {
+            width: 30%;
+            margin-right: 10px;
+        }
+        .phone-number {
+            width: 70%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="logo.png" alt="SN Logo" class="logo">
+        <form>
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" placeholder="Votre nom" required>
+
+            <label for="prenom">Prénom</label>
+            <input type="text" id="prenom" placeholder="Votre prénom" required>
+
+            <label for="pays">Sélectionner le pays</label>
+            <select id="pays" onchange="loadCities()">
+                <option value="">Choisissez un pays</option>
+            </select>
+
+            <label for="ville">Sélectionner la ville</label>
+            <select id="ville">
+                <option value="">Choisissez une ville</option>
+            </select>
+
+            <label for="telephone">Numéro de téléphone</label>
+            <div class="phone-container">
+                <select id="phone-code" class="phone-code">
+                    <option value="">Code</option>
+                </select>
+                <input type="tel" id="telephone" class="phone-number" placeholder="Votre numéro de téléphone" required>
+            </div>
+
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" placeholder="Créer un mot de passe" required>
+
+            <label for="confirm-password">Confirmer le mot de passe</label>
+            <input type="password" id="confirm-password" placeholder="Confirmez votre mot de passe" required>
+
+            <button type="submit">Créer un compte</button>
+            <button class="social-login">Continuer avec Google</button>
+            <button class="social-login">Continuer avec Facebook</button>
+        </form>
+    </div>
+
+    <script>
+        const paysSelect = document.getElementById('pays');
+        const villeSelect = document.getElementById('ville');
+        const phoneCodeSelect = document.getElementById('phone-code');
+
+        // Votre nom d'utilisateur GeoNames
+        const GEONAMES_USERNAME = 'demo'; // Remplacez par votre nom d'utilisateur GeoNames
+
+        // Charger les pays depuis l'API REST Countries (noms en français)
+        fetch('https://restcountries.com/v3.1/all?fields=translations,cca2,idd')
+            .then(response => response.json())
+            .then(data => {
+                // Trier les pays par ordre alphabétique (en français)
+                data.sort((a, b) => a.translations.fra.common.localeCompare(b.translations.fra.common));
+
+                // Ajouter les pays triés à la liste déroulante
+                data.forEach(country => {
+                    const option = document.createElement('option');
+                    option.value = country.cca2; // Code du pays (ex: FR, US)
+                    option.textContent = `${country.translations.fra.common} (${country.cca2})`; // Nom du pays en français + code
+                    paysSelect.appendChild(option);
+
+                    // Ajouter les codes de téléphone avec un seul "+"
+                    const phoneOption = document.createElement('option');
+                    const phoneCode = country.idd.root + (country.idd.suffixes ? country.idd.suffixes[0] : '');
+                    phoneOption.value = phoneCode.startsWith('+') ? phoneCode : `+${phoneCode}`; // Supprimer les "+" en double
+                    phoneOption.textContent = `${country.translations.fra.common} (${phoneOption.value})`;
+                    phoneCodeSelect.appendChild(phoneOption);
+                });
+            })
+            .catch(error => console.error('Erreur lors du chargement des pays:', error));
+
+        // Charger les villes depuis l'API GeoNames
+        function loadCities() {
+            const selectedCountry = paysSelect.value;
+            villeSelect.innerHTML = '<option value="">Choisissez une ville</option>';
+
+            if (selectedCountry) {
+                fetch(`http://api.geonames.org/searchJSON?country=${selectedCountry}&maxRows=10&username=${liah2004}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.geonames && data.geonames.length > 0) {
+                            data.geonames.forEach(city => {
+                                const option = document.createElement('option');
+                                option.value = city.name;
+                                option.textContent = city.name;
+                                villeSelect.appendChild(option);
+                            });
+                        } else {
+                            console.warn("Aucune ville trouvée pour ce pays :", selectedCountry);
+                        }
+                    })
+                    .catch(error => console.error('Erreur lors du chargement des villes:', error));
+            }
+        }
+    </script>
+</body>
+</html>

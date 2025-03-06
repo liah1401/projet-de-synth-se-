@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SN - Gestion des Produits</title>
+<style>
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            margin: 0;
+
+            padding: 0;
+
+            background-color: #f8f8f8;
+
+            display: flex;
+
+        }
+
+        .sidebar {
+
+            background: #222;
+
+            width: 200px;
+
+            height: 100vh;
+
+            padding: 20px;
+
+            color: white;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 10px;
+
+        }
+
+        .sidebar button {
+
+            width: 100%;
+
+            padding: 10px;
+
+            background: #444;
+
+            color: white;
+
+            border: none;
+
+            cursor: pointer;
+
+            text-align: left;
+
+        }
+
+        .container {
+
+            flex-grow: 1;
+
+            padding: 20px;
+
+        }
+
+        .actions {
+
+            display: flex;
+
+            gap: 10px;
+
+            margin-bottom: 15px;
+
+        }
+
+        .actions button {
+
+            padding: 10px;
+
+            background: #333;
+
+            color: white;
+
+            border: none;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+        }
+
+        .actions .add { background: green; }
+
+        .actions .edit { background: orange; }
+
+        .actions .delete { background: red; }
+
+        .actions .update { background: blue; }
+
+        .actions .photo { background: gray; }
+
+        .search-bar {
+
+            margin-bottom: 15px;
+
+            text-align: center;
+
+        }
+
+        .search-bar input {
+
+            width: 60%;
+
+            padding: 8px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 5px;
+
+        }
+
+        .search-bar button {
+
+            padding: 8px;
+
+            background: #007BFF;
+
+            color: white;
+
+            border: none;
+
+            cursor: pointer;
+
+        }
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            background: white;
+
+        }
+
+        th, td {
+
+            border: 1px solid #ddd;
+
+            padding: 10px;
+
+            text-align: left;
+
+        }
+
+        th {
+
+            background: #ccc;
+
+        }
+
+        .low-stock {
+
+            background-color: red;
+
+            color: white;
+
+        }
+
+        .high-stock {
+
+            background-color: lightgreen;
+
+        }
+
+        .footer-actions {
+
+            display: flex;
+
+            gap: 10px;
+
+            margin-top: 15px;
+
+        }
+
+        .footer-actions button {
+
+            padding: 10px;
+
+            background: black;
+
+            color: white;
+
+            border: none;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+        }
+
+        .excel { background: green; }
+</style>
+</head>
+<body>
+<div class="sidebar">
+<button>⚙ Paramètres</button>
+<button>📦 Produits</button>
+<button>🛒 Commandes</button>
+<button>👤 Clients</button>
+<button>📂 Catégories</button>
+<button>🔑 Utilisateurs</button>
+<button>📊 Rapports</button>
+</div>
+<div class="container">
+<div class="actions">
+<button class="add">➕ Ajouter</button>
+<button class="edit">✏️ Modifier</button>
+<button class="delete">❌ Supprimer</button>
+<button class="photo">🖼 Afficher Photo</button>
+<button class="update">🔄 Actualiser</button>
+</div>
+<div class="search-bar">
+<input type="text" placeholder="Rechercher un produit...">
+<button>🔍 Rechercher</button>
+</div>
+<table>
+<thead>
+<tr>
+<th>Select</th>
+<th>ID</th>
+<th>Nom</th>
+<th>Quantité</th>
+<th>Prix</th>
+<th>Catégorie</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><input type="checkbox"></td>
+<td>8</td>
+<td>iPhone</td>
+<td class="low-stock">0</td>
+<td>200$</td>
+<td>Téléphone</td>
+</tr>
+<tr>
+<td><input type="checkbox"></td>
+<td>11</td>
+<td>Samsung S6</td>
+<td class="high-stock">100</td>
+<td>600$</td>
+<td>Téléphone</td>
+</tr>
+<tr>
+<td><input type="checkbox"></td>
+<td>1011</td>
+<td>iPhone 7 Plus</td>
+<td>20</td>
+<td>1000$</td>
+<td>Téléphone</td>
+</tr>
+</tbody>
+</table>
+<div class="footer-actions">
+<button>🖨 Imprimer PR cocher</button>
+<button>🖨 Imprimer toutes</button>
+<button class="excel">📂 Sauvegarder dans Excel</button>
+</div>
+</div>
+</body>
+</html>
+
+ 

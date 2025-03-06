@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SN - Produits</title>
+<style>
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            margin: 0;
+
+            padding: 0;
+
+            background-color: #f8f8f8;
+
+        }
+
+        header {
+
+            background-color: #ffffff;
+
+            padding: 15px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            border-bottom: 1px solid #ddd;
+
+        }
+
+        nav a {
+
+            color: #333;
+
+            text-decoration: none;
+
+            margin: 0 10px;
+
+        }
+
+        .container {
+
+            display: flex;
+
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding: 20px;
+
+        }
+
+        .filters {
+
+            width: 250px;
+
+            padding: 15px;
+
+            background: white;
+
+            border-radius: 5px;
+
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+        }
+
+        .products {
+
+            flex-grow: 1;
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 15px;
+
+            padding-left: 20px;
+
+        }
+
+        .product-card {
+
+            background: white;
+
+            padding: 15px;
+
+            border-radius: 5px;
+
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+            text-align: center;
+
+        }
+
+        .product-card img {
+
+            width: 100%;
+
+            border-radius: 5px;
+
+        }
+
+        footer {
+
+            background-color: #ffffff;
+
+            color: #333;
+
+            padding: 20px;
+
+            text-align: center;
+
+            border-top: 1px solid #ddd;
+
+        }
+</style>
+</head>
+<body>
+<header>
+<h1>SN</h1>
+<nav>
+<a href="#">Products</a>
+<a href="#">Solutions</a>
+<a href="#">Community</a>
+<a href="#">Resources</a>
+<a href="#">Pricing</a>
+<a href="#">Contact</a>
+<button>Sign in</button>
+<button>Register</button>
+</nav>
+</header>
+<section class="container">
+<aside class="filters">
+<h3>Keywords</h3>
+<p>Spring × Smart × Modern ×</p>
+<h3>Price</h3>
+<input type="range" min="0" max="100">
+<h3>Color</h3>
+<p><input type="checkbox"> Label</p>
+<h3>Size</h3>
+<p><input type="checkbox"> Label</p>
+</aside>
+<section class="products">
+<div class="product-card">
+<img src="product1.jpg" alt="Titi White">
+<p>Titi White</p>
+<p>$45</p>
+</div>
+<div class="product-card">
+<img src="product2.jpg" alt="Gels Douches Gomant VeetGold">
+<p>Gels Douches Gomant VeetGold</p>
+<p>$35</p>
+</div>
+<div class="product-card">
+<img src="product3.jpg" alt="Lotions Vaseline Intensive Care">
+<p>Lotions Vaseline Intensive Care</p>
+<p>$25</p>
+</div>
+<div class="product-card">
+<img src="product4.jpg" alt="Huiles Vaseline">
+<p>Huiles Vaseline</p>
+<p>$15</p>
+</div>
+<div class="product-card">
+<img src="product5.jpg" alt="Sérums Vaseline GlutaGlow">
+<p>Sérums Vaseline GlutaGlow</p>
+<p>$25</p>
+</div>
+<div class="product-card">
+<img src="product6.jpg" alt="Gamme Healthy Glow">
+<p>Gamme Healthy Glow</p>
+<p>$75</p>
+</div>
+</section>
+</section>
+<footer>
+<p>&copy; 2025 SN - Tous droits réservés</p>
+</footer>
+</body>
+</html>
+
+ 

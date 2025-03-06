@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire de Paiement</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .payment-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .payment-method,
+        .currency {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        select,
+        input {
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .card-info {
+            margin-bottom: 20px;
+        }
+
+        .card-info input {
+            width: 48%;
+            margin-right: 4%;
+        }
+
+        .card-info input:last-child {
+            margin-right: 0;
+        }
+
+        .order-summary {
+            margin-top: 20px;
+            border-top: 2px solid #f1f1f1;
+            padding-top: 10px;
+        }
+
+        .order-summary img {
+            max-width: 100px;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <h1>Paiement en ligne</h1>
+
+        <!-- Formulaire de paiement -->
+        <form action="/submit-payment" method="POST">
+            <div class="payment-method">
+                <label for="payment-method">Méthode de paiement :</label>
+                <select name="payment-method" id="payment-method">
+                    <option value="mobile">Moov Money</option>
+                    <option value="airtel">Airtel Money</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="credit-card">Carte Bancaire</option>
+                    <option value="apple-pay">Apple Pay</option>
+                    <option value="google-pay">Google Pay</option>
+                </select>
+            </div>
+
+            <!-- Information Carte Bancaire -->
+            <div class="card-info" id="card-info" style="display: none;">
+                <label for="card-number">Numéro de Carte :</label>
+                <input type="text" id="card-number" name="card-number" placeholder="1234 5678 9876 5432" required>
+
+                <label for="card-expiry">Date d'expiration :</label>
+                <input type="text" id="card-expiry" name="card-expiry" placeholder="MM/AA" required>
+
+                <label for="card-cvc">Code de sécurité :</label>
+                <input type="text" id="card-cvc" name="card-cvc" placeholder="CVC" required>
+            </div>
+
+            <!-- Sélection de la devise -->
+            <div class="currency">
+                <label for="currency">Choisir la devise :</label>
+                <select name="currency" id="currency">
+                    <option value="CDF">Franc Congolais (CDF)</option>
+                    <option value="USD">Dollar Américain (USD)</option>
+                    <option value="CAD">Dollar Canadien (CAD)</option>
+                    <option value="EUR">Euro (EUR)</option>
+                </select>
+            </div>
+
+            <!-- Résumé de la commande -->
+            <div class="order-summary">
+                <h3>Résumé de la commande</h3>
+                <p><strong>Produit :</strong> T-shirt en coton</p>
+                <p><strong>Prix :</strong> <span id="product-price">20.00</span> <span id="currency-symbol">€</span></p>
+                <img src="t-shirt.jpg" alt="T-shirt" class="product-image">
+            </div>
+
+            <button type="submit">Payer maintenant</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('payment-method').addEventListener('change', function() {
+            var paymentMethod = this.value;
+            var cardInfo = document.getElementById('card-info');
+            
+            if (paymentMethod === 'credit-card') {
+                cardInfo.style.display = 'block';
+            } else {
+                cardInfo.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
+s

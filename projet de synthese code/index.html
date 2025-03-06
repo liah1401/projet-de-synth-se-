@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SN - Produits cosmétiques</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e4d0c3;
+        }
+        header {
+            background-color: #6d5d52;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        .hero {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+        }
+        .hero img {
+            max-width: 150px;
+            margin-right: 20px;
+        }
+        .products {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            padding: 20px;
+        }
+        .products img {
+            width: 100%;
+            border-radius: 5px;
+        }
+        footer {
+            background-color: #6d5d52;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>SN</h1>
+        <nav>
+            <a href="#">Products</a>
+            <a href="#">Solutions</a>
+            <a href="#">Community</a>
+            <a href="#">Resources</a>
+            <a href="#">Pricing</a>
+            <a href="#">Contact</a>
+            <button>Sign in</button>
+            <button>Register</button>
+        </nav>
+    </header>
+    <section class="hero">
+        <img src="logo.png" alt="Logo SN">
+        <div>
+            <h2>Bienvenue chez SN</h2>
+            <p>Découvrez nos produits cosmétiques de haute qualité pour sublimer votre beauté naturelle et donner à votre peau un éclat divin.</p>
+        </div>
+    </section>
+    <section class="products">
+        <img src="product1.jpg" alt="Les huiles de corps">
+        <img src="product2.jpg" alt="les savons">
+        <img src="product3.jpg" alt="Les lotions corporelles">
+        <img src="product4.jpg" alt="Les gels douches">
+        <img src="product5.jpg" alt="Les gels douches gommants">
+        <img src="product6.jpg" alt="Les Sérums">
+        <img src="product7.jpg" alt="Les cremes de visage">
+        <img src="product8.jpg" alt="LES GAMMES">
+    </section>
+    <footer>
+        <p>&copy; 2025 SN - Tous droits réservés</p>
+    </footer>
+</body>
+</html>

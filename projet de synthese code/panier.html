@@ -1,0 +1,257 @@
+<!DOCTYPE html> 
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panier d'Achat</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f1e7;
+            text-align: center;
+            margin: 20px;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            color: #5a3e2b;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f3e2c7;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-item img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .item-details {
+            flex-grow: 1;
+            text-align: left;
+            padding: 0 15px;
+        }
+
+        .price {
+            font-weight: bold;
+            color: #8b5e3b;
+        }
+
+        .quantity {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity input {
+            width: 40px;
+            text-align: center;
+            margin: 0 5px;
+        }
+
+        .delete-icon {
+            color: red;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .rupture {
+            color: red;
+            font-weight: bold;
+        }
+
+        button {
+            background-color: #8b5e3b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #5a3e2b;
+        }
+
+        #search {
+            margin: 10px 0;
+            padding: 10px;
+            width: 50%;
+            font-size: 16px;
+        }
+
+        .select-checkbox {
+            margin-right: 15px;
+        }
+
+        #pay-button {
+            background-color: #4CAF50;
+            cursor: pointer;
+        }
+
+        #pay-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .total-price {
+            font-size: 18px;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #8b5e3b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mon Panier</h1>
+
+        <!-- Recherche de produits -->
+        <input type="text" id="search" placeholder="Rechercher un produit..." onkeyup="searchProduct()">
+
+        <div id="cart">
+            <!-- Articles du panier -->
+            <div class="cart-item">
+                <input type="checkbox" class="select-checkbox" onclick="updateTotal()">
+                <img src="parfum.jpg" alt="Parfum">
+                <div class="item-details">
+                    <p>Parfum Floral</p>
+                    <p class="price" data-price="30">30$</p>
+                    <p class="rupture">Stock restant : 5</p>
+                </div>
+                <div class="quantity">
+                    <button onclick="decreaseQuantity(this)">-</button>
+                    <input type="text" value="1" readonly>
+                    <button onclick="increaseQuantity(this)">+</button>
+                </div>
+                <button class="delete-icon" onclick="deleteItem(this)">Supprimer</button>
+            </div>
+            <div class="cart-item">
+                <input type="checkbox" class="select-checkbox" onclick="updateTotal()">
+                <img src="savon.jpg" alt="Savon">
+                <div class="item-details">
+                    <p>Savon Doux</p>
+                    <p class="price" data-price="5">5$</p>
+                    <p class="rupture">Stock restant : 10</p>
+                </div>
+                <div class="quantity">
+                    <button onclick="decreaseQuantity(this)">-</button>
+                    <input type="text" value="1" readonly>
+                    <button onclick="increaseQuantity(this)">+</button>
+                </div>
+                <button class="delete-icon" onclick="deleteItem(this)">Supprimer</button>
+            </div>
+            <div class="cart-item">
+                <input type="checkbox" class="select-checkbox" onclick="updateTotal()">
+                <img src="gel-douche.jpg" alt="Gel Douche">
+                <div class="item-details">
+                    <p>Gel Douche Naturel</p>
+                    <p class="price" data-price="12">12$</p>
+                    <p class="rupture">Stock restant : 8</p>
+                </div>
+                <div class="quantity">
+                    <button onclick="decreaseQuantity(this)">-</button>
+                    <input type="text" value="1" readonly>
+                    <button onclick="increaseQuantity(this)">+</button>
+                </div>
+                <button class="delete-icon" onclick="deleteItem(this)">Supprimer</button>
+            </div>
+        </div>
+
+        <div class="total-price" id="total-price">Total: 0$</div>
+        <button id="pay-button" onclick="checkout()" disabled>Payer </button>
+    </div>
+
+    <script>
+        // Fonction pour augmenter la quantité d'un produit
+        function increaseQuantity(button) {
+            let input = button.previousElementSibling;
+            input.value = parseInt(input.value) + 1;
+            updateTotal();
+        }
+
+        // Fonction pour diminuer la quantité d'un produit
+        function decreaseQuantity(button) {
+            let input = button.nextElementSibling;
+            if (parseInt(input.value) > 1) {
+                input.value = parseInt(input.value) - 1;
+                updateTotal();
+            }
+        }
+
+        // Fonction pour supprimer un article du panier
+        function deleteItem(button) {
+            button.parentElement.remove();
+            updateTotal();
+        }
+
+        // Fonction de paiement
+        function checkout() {
+            let selectedItems = document.querySelectorAll('.select-checkbox:checked');
+            if (selectedItems.length > 0) {
+                alert("Paiement en cours pour " + selectedItems.length + " article(s).");
+            } else {
+                alert("Veuillez sélectionner des articles à payer.");
+            }
+        }
+
+        // Fonction de recherche de produit
+        function searchProduct() {
+            let input = document.getElementById('search');
+            let filter = input.value.toLowerCase();
+            let items = document.querySelectorAll('.cart-item');
+
+            items.forEach(item => {
+                let productName = item.querySelector('.item-details p').textContent.toLowerCase();
+                if (productName.includes(filter)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Calcul du total
+        function updateTotal() {
+            let total = 0;
+            let selectedItems = document.querySelectorAll('.cart-item');
+
+            selectedItems.forEach(item => {
+                let checkbox = item.querySelector('.select-checkbox');
+                let quantity = item.querySelector('.quantity input').value;
+                if (checkbox.checked) {
+                    let price = parseFloat(item.querySelector('.price').getAttribute('data-price'));
+                    total += price * quantity;
+                }
+            });
+
+            document.getElementById('total-price').textContent = "Total: " + total.toFixed(2) + "€";
+            togglePayButton();
+        }
+
+        // Activer/désactiver le bouton de paiement selon les articles sélectionnés
+        function togglePayButton() {
+            let selectedItems = document.querySelectorAll('.select-checkbox:checked');
+            document.getElementById('pay-button').disabled = selectedItems.length === 0;
+        }
+    </script>
+</body>
+</html>
